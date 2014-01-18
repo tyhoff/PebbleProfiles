@@ -7,7 +7,7 @@
 		<key>cell</key>
 		<string>PSLinkCell</string>
 		<key>icon</key>
-		<string>Pebble Profiles.png</string>
+		<string>PebbleProfiles.png</string>
 		<key>label</key>
 		<string>Pebble Profiles</string>
 	</dict>

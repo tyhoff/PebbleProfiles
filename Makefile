@@ -10,7 +10,6 @@ include theos/makefiles/common.mk
 
 TWEAK_NAME = PebbleProfiles
 PebbleProfiles_FILES = Tweak.xm
-PebbleProfiles_FRAMEWORKS = Foundation 
 PebbleProfiles_CFLAGS = -fobjc-arc
 
 include $(THEOS_MAKE_PATH)/tweak.mk
