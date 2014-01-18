@@ -1,0 +1,6 @@
+com.*
+_/*
+importantlog
+obj/*
+.theos/*
+log.xm

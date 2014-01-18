@@ -1,0 +1,9 @@
+Package: com.tyhoff.pebbleprofiles
+Name: Pebble Profiles
+Depends: mobilesubstrate
+Version: 0.0.1
+Architecture: iphoneos-arm
+Description: An awesome MobileSubstrate tweak!
+Maintainer: Tyler Hoffman
+Author: Tyler Hoffman
+Section: Tweaks

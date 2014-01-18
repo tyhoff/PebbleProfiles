@@ -1,0 +1,3 @@
+#!/bin/bash
+launchctl stop com.apple.BTServer.le
+exit 0
