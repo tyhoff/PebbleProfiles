@@ -7,14 +7,12 @@ static BOOL enabled;
 #define GET_BOOL(key, default) (prefs[key] ? ((NSNumber *)prefs[key]).boolValue : default)
 
 %hook ANCService
-- (void)updateDataSource:(id)arg1 central:(id)arg2 
-{ 
-	%log; 
+- (void)alertAdded:(id)arg1 isSilent:(_Bool)arg2
+{
 	if (isDeviceLocked || !enabled) 
 	{
 		%orig;
 	}
-
 }
 %end
 

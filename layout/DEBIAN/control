@@ -4,8 +4,8 @@ Depends: mobilesubstrate, preferenceloader, firmware (>= 7.0)
 Version: 1.0
 Architecture: iphoneos-arm
 Description: Suppress Pebble notifications when phone is unlocked. Only iOS 7 and above. iPhone 4S or newer. Should work with other smartwatches besides Pebble that utilize Bluetooth LE. 
-Maintainer: Tyler Hoffman (tyhoff) <tyhoffman1@gmail.com>
-Author: Tyler Hoffman (tyhoff) <tyhoffman1@gmail.com>
+Maintainer: Tyler Hoffman <tyhoffman1@gmail.com>
+Author: Tyler Hoffman <tyhoffman1@gmail.com>
 Section: Tweaks
 Homepage: https://github.com/tyhoff/PebbleProfiles
 Icon: file:///Library/PreferenceLoader/Preferences/PebbleProfiles@2x.png
