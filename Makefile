@@ -11,5 +11,9 @@ PebbleProfiles_CFLAGS = -fobjc-arc
 
 include $(THEOS_MAKE_PATH)/tweak.mk
 
+SUBPROJECTS += pebbleprofilesflip
+include $(THEOS_MAKE_PATH)/aggregate.mk
+
 after-install::
-	install.exec "killall -9 BTLEServer"
+	install.exec "killall -9 BTLEServer SpringBoard"
+
