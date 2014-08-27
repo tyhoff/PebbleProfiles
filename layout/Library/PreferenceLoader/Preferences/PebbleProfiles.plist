@@ -19,7 +19,7 @@ entry = {
 		{
 			cell = PSGroupCell;
 			label = "Allow Notifications From";
-			footerText = "These are the applications that will receive notifications. NOTE: These must also be enabled in Settings.";
+			footerText = "These are the applications that will receive notifications. NOTE: These must also be enabled in Settings->Notifications.";
 		},
 		{
 			bundle = AppList;
@@ -33,19 +33,19 @@ entry = {
 			ALAllowsSelection = 1;
 			ALSectionDescriptors = (
 				{
-				  title = "System Applications";
-				  predicate = "isSystemApplication = TRUE";
-				  "cell-class-name" = "ALSwitchCell";
-				  "icon-size" = 29;
-				  "suppress-hidden-apps" = 1;
-				},
-				{
 				  title = "User Applications";
 				  predicate = "isSystemApplication = FALSE";
 				  "cell-class-name" = "ALSwitchCell";
 				  "icon-size" = 29;
 				  "suppress-hidden-apps" = 1;
 				  "footer-title" = "© 2010-2012 Ryan Petrich";
+				},
+				{
+				  title = "System Applications";
+				  predicate = "isSystemApplication = TRUE";
+				  "cell-class-name" = "ALSwitchCell";
+				  "icon-size" = 29;
+				  "suppress-hidden-apps" = 1;
 				}
 			);
 		},
