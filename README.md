@@ -23,4 +23,4 @@ BTServer is an executable located at `/usr/bin/btserver` and it is (probably) in
 
 
 ### Other Stuff
-__This tweak is not affiliated with Pebble Technology in any way. It is a personal project and remains so.__
+__This tweak is not affiliated with Pebble Technology in any way. It is a personal project and remains that way.__
