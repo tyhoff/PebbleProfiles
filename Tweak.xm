@@ -3,12 +3,23 @@
 static BOOL hasReceivedLockComplete;
 static BOOL isDeviceLocked;
 static BOOL enabled;
+NSMutableArray *disabled_apps;
 
 #define GET_BOOL(key, default) (prefs[key] ? ((NSNumber *)prefs[key]).boolValue : default)
 
+
 %hook ANCService
-- (void)alertAdded:(id)arg1 isSilent:(_Bool)arg2
+- (void)alertAdded:(ANCAlert *)alert isSilent:(_Bool)isSilent
 {
+    NSString *app_id = [alert appIdentifier];
+
+    // do not allow applications that are not "enabled" to push a message
+    if ([disabled_apps containsObject:app_id]) {
+        return;
+    }
+
+
+    // if the device is locked and we are not enabled, then push a message
 	if (isDeviceLocked || !enabled) 
 	{
 		%orig;
@@ -52,6 +63,20 @@ static void LoadSettings()
 {
   	NSDictionary *prefs = [NSDictionary dictionaryWithContentsOfFile:@"/var/mobile/Library/Preferences/com.tyhoff.pebbleprofiles.plist"];
   	enabled = GET_BOOL(@"enabled", YES);
+
+    NSDictionary *apps = [NSDictionary dictionaryWithContentsOfFile:@"/var/mobile/Library/Preferences/com.tyhoff.pebbleprofiles.applist.plist"];
+    disabled_apps = [[NSMutableArray alloc] init];
+
+    // run through the App List and check for enabled applications. 
+    // If enabled, save them to global disabled_apps array
+    for (NSString *key in apps) {
+        bool app_disabled = [[apps objectForKey:key] boolValue];
+
+
+        if (!app_disabled) {
+            [disabled_apps addObject:key];
+        }
+    }
 }
 
 /* called when a change to the preferences has been made */

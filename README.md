@@ -2,8 +2,11 @@
 
 ### What is it
 If the iPhone is unlocked, suppress Pebble notifications. 
-
 If the iPhone is locked, then send the notifications to Pebble.
+
+Choose which applications should be able to send the ANCS devices notifications.
+
+> To receieve notifications from an application, notifications must be enabled in Settings->Notification Center AND in Pebble Profiles Settings.
 
 Should work with all Bluetooth 4.0 devices.
 

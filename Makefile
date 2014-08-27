@@ -8,11 +8,9 @@ include theos/makefiles/common.mk
 TWEAK_NAME = PebbleProfiles
 PebbleProfiles_FILES = Tweak.xm
 PebbleProfiles_CFLAGS = -fobjc-arc
+PebbleProfiles_LIBRARIES = applist
 
 include $(THEOS_MAKE_PATH)/tweak.mk
-
-SUBPROJECTS += pebbleprofilesflip
-include $(THEOS_MAKE_PATH)/aggregate.mk
 
 after-install::
 	install.exec "killall -9 BTLEServer SpringBoard"
