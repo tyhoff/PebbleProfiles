@@ -10,6 +10,7 @@ Choose which applications should be able to send the ANCS devices notifications.
 
 Should work with all Bluetooth 4.0 devices.
 
+### Screenshots
 ![](http://i.imgur.com/ke9WOSr.png)
 ![](http://i.imgur.com/WmbYfsk.png)
 
