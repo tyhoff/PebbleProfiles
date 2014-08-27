@@ -10,6 +10,9 @@ Choose which applications should be able to send the ANCS devices notifications.
 
 Should work with all Bluetooth 4.0 devices.
 
+![](http://i.imgur.com/WmbYfsk.png)
+![](http://i.imgur.com/ke9WOSr.png)
+
 
 ### How I made it
 - Decompiled using $class-dump ./BTLEServer > BTLEServer.h
