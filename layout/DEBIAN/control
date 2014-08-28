@@ -1,6 +1,6 @@
 Package: com.tyhoff.pebbleprofiles
 Name: Pebble Profiles
-Depends: mobilesubstrate, preferenceloader, firmware (>= 7.0)
+Depends: mobilesubstrate, applist, preferenceloader, firmware (>= 7.0)
 Version: 1.1
 Architecture: iphoneos-arm
 Description: Suppress Pebble notifications when phone is unlocked and filter notifications. Only iOS 7 and above. iPhone 4S or newer. Should work with other smartwatches besides Pebble that utilize Bluetooth LE. 
