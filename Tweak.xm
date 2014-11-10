@@ -19,11 +19,27 @@ NSMutableArray *disabled_apps;
     }
 
 
-    // if the device is locked and we are not enabled, then push a message
+    // if the device is locked or we are not enabled, then push a message
 	if (isDeviceLocked || !enabled) 
 	{
 		%orig;
 	}
+}
+
+- (void)alertAdded:(id)alert isSilent:(_Bool)isSilent isPreExisting:(_Bool)arg3 {
+    NSString *app_id = [alert appIdentifier];
+
+    // do not allow applications that are not "enabled" to push a message
+    if ([disabled_apps containsObject:app_id]) {
+        return;
+    }
+
+
+    // if the device is locked or we are not enabled, then push a message
+    if (isDeviceLocked || !enabled)
+    {
+        %orig;
+    }
 }
 %end
 
@@ -72,11 +88,11 @@ static void LoadSettings()
     for (NSString *key in apps) {
         bool app_disabled = [[apps objectForKey:key] boolValue];
 
-
         if (!app_disabled) {
             [disabled_apps addObject:key];
         }
     }
+    NSLog(@"Disabled Applications: %@", disabled_apps);
 }
 
 /* called when a change to the preferences has been made */
