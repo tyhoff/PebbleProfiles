@@ -41,6 +41,9 @@ NSMutableArray *disabled_apps;
         %orig;
     }
 }
+- (void)alertRemoved:(id)arg1 isSilent:(_Bool)arg2{
+
+}
 %end
 
 /* Notification received callback */
