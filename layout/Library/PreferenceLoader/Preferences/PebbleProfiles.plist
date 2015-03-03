@@ -52,11 +52,11 @@ entry = {
 		{
 			cell = PSGroupCell;
 			isStaticText = 1;
-			label = "Credit";
+			label = "Credits to @joe_merlino";
 		},
 		{
 			cell = PSTitleValueCell;
-			label = "Pebble Profiles 1.1";
+			label = "Pebble Profiles 1.1.3";
 		},
 		{
 			cell = PSTitleValueCell;
