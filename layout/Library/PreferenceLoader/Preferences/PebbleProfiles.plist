@@ -18,8 +18,8 @@ entry = {
 		},
 		{
 			cell = PSGroupCell;
-			label = "Allow Notifications From";
-			footerText = "These are the applications that will receive notifications. NOTE: These must also be enabled in Settings->Notifications.";
+			label = "Disable Notifications From";
+			footerText = "If you turn on the switch, you won't receive notifications from a specific app even if the iPhone is locked.";
 		},
 		{
 			bundle = AppList;
@@ -29,7 +29,40 @@ entry = {
 			ALSettingsPath = "/var/mobile/Library/Preferences/com.tyhoff.pebbleprofiles.applist.plist";
 			ALSettingsKeyPrefix = "";
 			ALChangeNotification = "com.tyhoff.pebbleprofiles.preferencechanged";
-			"ALSettingsDefaultValue" = 1;
+			"ALSettingsDefaultValue" = 0;
+			ALAllowsSelection = 1;
+			ALSectionDescriptors = (
+				{
+				  title = "User Applications";
+				  predicate = "isSystemApplication = FALSE";
+				  "cell-class-name" = "ALSwitchCell";
+				  "icon-size" = 29;
+				  "suppress-hidden-apps" = 1;
+				  "footer-title" = "© 2010-2012 Ryan Petrich";
+				},
+				{
+				  title = "System Applications";
+				  predicate = "isSystemApplication = TRUE";
+				  "cell-class-name" = "ALSwitchCell";
+				  "icon-size" = 29;
+				  "suppress-hidden-apps" = 1;
+				}
+			);
+		},
+		{
+			cell = PSGroupCell;
+			label = "Enable Notifications From";
+			footerText = "If you turn on the switch, you will receive notifications from a specific app even if the iPhone is unlocked.";
+		},
+		{
+			bundle = AppList;
+			cell = PSLinkCell;
+			isController = 1;
+			label = "Choose Applications";
+			ALSettingsPath = "/var/mobile/Library/Preferences/com.tyhoff.pebbleprofiles.applist2.plist";
+			ALSettingsKeyPrefix = "";
+			ALChangeNotification = "com.tyhoff.pebbleprofiles.preferencechanged";
+			"ALSettingsDefaultValue" = 0;
 			ALAllowsSelection = 1;
 			ALSectionDescriptors = (
 				{
