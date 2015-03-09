@@ -87,7 +87,7 @@ static void LoadSettings()
     NSDictionary *apps = [NSDictionary dictionaryWithContentsOfFile:@"/var/mobile/Library/Preferences/com.tyhoff.pebbleprofiles.applist.plist"];
     disabled_apps = [[NSMutableArray alloc] init];
 
-    // run through the App List and check for enabled applications. 
+    // run through the App List and check for disabled applications in lockscreen. 
     // If enabled, save them to global disabled_apps array
     for (NSString *key in apps) {
         bool app_disabled = [[apps objectForKey:key] boolValue];
@@ -102,7 +102,7 @@ static void LoadSettings()
     enabled_apps = [[NSMutableArray alloc] init];
 
     // run through the App List and check for enabled applications. 
-    // If enabled, save them to global disabled_apps array
+    // If enabled, save them to global enabled_apps array
     for (NSString *key in apps2) {
         bool app_enabled = [[apps2 objectForKey:key] boolValue];
 
@@ -126,7 +126,7 @@ static void ChangeNotification(CFNotificationCenterRef center, void *observer, C
 	hasReceivedLockComplete = NO;
 	isDeviceLocked = YES;
 
-	/* subsribe to preference changed notification */
+	/* subscribe to preference changed notification */
 	CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(), NULL, ChangeNotification, CFSTR("com.tyhoff.pebbleprofiles.preferencechanged"), NULL, CFNotificationSuspensionBehaviorCoalesce);
   	LoadSettings();
 

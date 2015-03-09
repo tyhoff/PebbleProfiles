@@ -10,11 +10,11 @@ entry = {
 		},
 		{
 			cell = PSSwitchCell;
+			PostNotification = "com.tyhoff.pebbleprofiles.preferencechanged";
 			label = "Enabled";
 			default = 1;
 			defaults = "com.tyhoff.pebbleprofiles";
 			key = enabled;
-			PostNotification = "com.tyhoff.pebbleprofiles.preferencechanged";
 		},
 		{
 			cell = PSGroupCell;
@@ -84,20 +84,7 @@ entry = {
 		},
 		{
 			cell = PSGroupCell;
-			isStaticText = 1;
-			label = "Credits to @joe_merlino";
-		},
-		{
-			cell = PSTitleValueCell;
-			label = "Pebble Profiles 1.1.3";
-		},
-		{
-			cell = PSTitleValueCell;
-			label = "Made by Tyler Hoffman";
-		},
-		{
-			cell = PSTitleValueCell;
-			label = "Contact: tyhoffman1@gmail.com";
+			footerText = "Pebble Profiles 1.1.3 By Joe Merlino - @joe_merlino";
 		}
 	);
 };
