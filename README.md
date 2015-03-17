@@ -1,8 +1,5 @@
 ## Pebble Profiles 
 
-### To install it
-Add my repo: http://cydia.myrepospace.com/joemerlino/
-
 ### What it does
 1. If the iPhone is unlocked, suppress Pebble notifications or choose which one can still send notifications to Pebble. 
 2. If the iPhone is locked, then send the notifications to Pebble or choose which one doesn't. 

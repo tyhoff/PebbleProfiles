@@ -1,21 +1,35 @@
 #import "headers.h"
+#import "pebbleprofiles/FSSwitchPanel.h"
 
 static BOOL hasReceivedLockComplete;
 static BOOL isDeviceLocked;
 static BOOL enabled;
+static BOOL dnd;
+static BOOL DNDEnabled;
+
 NSMutableArray *disabled_apps;
 NSMutableArray *enabled_apps;
 
-#define GET_BOOL(key, default) (prefs[key] ? ((NSNumber *)prefs[key]).boolValue : default)
+static NSString *domainString = @"/var/mobile/Library/Preferences/com.tyhoff.pebbleprofiles.plist";
 
+@interface NSUserDefaults (Tweak_Category)
+- (id)objectForKey:(NSString *)key inDomain:(NSString *)domain;
+- (void)setObject:(id)value forKey:(NSString *)key inDomain:(NSString *)domain;
+@end
 
 %hook ANCService
 - (void)alertAdded:(ANCAlert *)alert isSilent:(_Bool)isSilent
 {
+    if ([[FSSwitchPanel sharedPanel] stateForSwitchIdentifier:@"com.a3tweaks.switch.do-not-disturb"] == 0){
+        DNDEnabled = NO;
+    }
+    else if ([[FSSwitchPanel sharedPanel] stateForSwitchIdentifier:@"com.a3tweaks.switch.do-not-disturb"] == 1){
+        DNDEnabled = YES;
+    }
     NSString *app_id = [alert appIdentifier];
 
     // do not allow applications that are not "enabled" to push a message
-    if ([disabled_apps containsObject:app_id]) {
+    if ([disabled_apps containsObject:app_id] || (dnd && DNDEnabled)) {
         return;
     }
 
@@ -28,10 +42,16 @@ NSMutableArray *enabled_apps;
 }
 
 - (void)alertAdded:(id)alert isSilent:(_Bool)isSilent isPreExisting:(_Bool)arg3 {
+    if ([[FSSwitchPanel sharedPanel] stateForSwitchIdentifier:@"com.a3tweaks.switch.do-not-disturb"] == 0){
+        DNDEnabled = NO;
+    }
+    else if ([[FSSwitchPanel sharedPanel] stateForSwitchIdentifier:@"com.a3tweaks.switch.do-not-disturb"] == 1){
+        DNDEnabled = YES;
+    }
     NSString *app_id = [alert appIdentifier];
 
     // do not allow applications that are not "enabled" to push a message
-    if ([disabled_apps containsObject:app_id]) {
+    if ([disabled_apps containsObject:app_id] || (dnd && DNDEnabled)) {
         return;
     }
 
@@ -81,9 +101,16 @@ static void displayStatusChanged(CFNotificationCenterRef center,
 /* called when a change to the preferences has been made */
 static void LoadSettings()
 {
-  	NSDictionary *prefs = [NSDictionary dictionaryWithContentsOfFile:@"/var/mobile/Library/Preferences/com.tyhoff.pebbleprofiles.plist"];
-  	enabled = GET_BOOL(@"enabled", YES);
-
+    NSNumber *n = (NSNumber *)[[NSUserDefaults standardUserDefaults] objectForKey:@"enabled" inDomain:domainString];
+    enabled = (n)? [n boolValue]:YES;
+    NSNumber *n2 = (NSNumber *)[[NSUserDefaults standardUserDefaults] objectForKey:@"dnd" inDomain:domainString];
+    dnd = (n2)? [n2 boolValue]:YES;
+    if ([[FSSwitchPanel sharedPanel] stateForSwitchIdentifier:@"com.a3tweaks.switch.do-not-disturb"] == 0){
+        DNDEnabled = NO;
+    }
+    else if ([[FSSwitchPanel sharedPanel] stateForSwitchIdentifier:@"com.a3tweaks.switch.do-not-disturb"] == 1){
+        DNDEnabled = YES;
+    }
     NSDictionary *apps = [NSDictionary dictionaryWithContentsOfFile:@"/var/mobile/Library/Preferences/com.tyhoff.pebbleprofiles.applist.plist"];
     disabled_apps = [[NSMutableArray alloc] init];
 
@@ -96,7 +123,6 @@ static void LoadSettings()
             [disabled_apps addObject:key];
         }
     }
-    NSLog(@"Disabled Applications: %@", disabled_apps);
 
     NSDictionary *apps2 = [NSDictionary dictionaryWithContentsOfFile:@"/var/mobile/Library/Preferences/com.tyhoff.pebbleprofiles.applist2.plist"];
     enabled_apps = [[NSMutableArray alloc] init];
@@ -110,6 +136,7 @@ static void LoadSettings()
             [enabled_apps addObject:key];
         }
     }
+    NSLog(@"Disabled Applications: %@", disabled_apps);
     NSLog(@"Enabled Applications: %@", enabled_apps);
 }
 

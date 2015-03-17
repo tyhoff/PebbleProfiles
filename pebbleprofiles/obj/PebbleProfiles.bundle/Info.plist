@@ -7,7 +7,7 @@
 	<key>CFBundleExecutable</key>
 	<string>PebbleProfiles</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.tyoff.pebbleprofiles</string>
+	<string>com.tyhoff.pebbleprofiles</string>
 	<key>CFBundleDisplayName</key>
 	<string>PebbleProfiles</string>
 	<key>CFBundleInfoDictionaryVersion</key>

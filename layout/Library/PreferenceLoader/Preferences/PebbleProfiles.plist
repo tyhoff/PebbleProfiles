@@ -10,11 +10,24 @@ entry = {
 		},
 		{
 			cell = PSSwitchCell;
-			PostNotification = "com.tyhoff.pebbleprofiles.preferencechanged";
 			label = "Enabled";
 			default = 1;
 			defaults = "com.tyhoff.pebbleprofiles";
 			key = enabled;
+			PostNotification = "com.tyhoff.pebbleprofiles.preferencechanged";
+		},
+		{
+			cell = PSGroupCell;
+			label = "Do not Disturb silencer";
+			footerText = "When the DnD and this switch are on, supress notifications from the Pebble.";
+		},
+		{
+			cell = PSSwitchCell;
+			label = "Enabled";
+			default = 1;
+			defaults = "com.tyhoff.pebbleprofiles";
+			key = dnd;
+			PostNotification = "com.tyhoff.pebbleprofiles.preferencechanged";
 		},
 		{
 			cell = PSGroupCell;
@@ -84,7 +97,12 @@ entry = {
 		},
 		{
 			cell = PSGroupCell;
-			footerText = "Pebble Profiles 1.1.3 By Joe Merlino - @joe_merlino";
+			label = "Please donate via paypal to:";
+			footerText = "Developed by Joe Merlino, credits to Tyler Hoffman.";
+		},
+		{
+			cell = PSTitleValueCell;
+			label = "merlino.giuseppe1@gmail.com";
 		}
 	);
 };
