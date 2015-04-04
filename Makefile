@@ -16,4 +16,5 @@ after-install::
 	install.exec "killall -9 BTLEServer SpringBoard"
 
 SUBPROJECTS += pebbleprofiles
+SUBPROJECTS += pebblednd
 include $(THEOS_MAKE_PATH)/aggregate.mk

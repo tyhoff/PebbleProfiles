@@ -1,0 +1,14 @@
+"Phone Unlocked Behavior" = "iPhone desbloqueado";
+"Enabled" = "Activar";
+"When the phone is unlocked it suppresses notifications to Pebble." = "Desactiva las notificaciones en el Pebble cuando el iPhone esté desbloqueado.";
+"iPhone Do not Disturb" = "No molestar del iPhone";
+"When the iPhone DnD and this switch are on it suppresses notifications to Pebble." = "Desactiva las notificaciones en el Pebble cuando No molestar esté activado en el iPhone.";
+"Pebble Do not Disturb" = "No molestar del Pebble";
+"It replicates the Pebble DnD feature with the addition of a flipswitch toggle. If enabled it suppresses ALL notifications to Pebble." = "Desactiva todas las notificaciones en el Pebble.";
+"Disable Notifications From" = "Desactivar notificaciones";
+"If you turn on the switch, you won't receive notifications from a specific app even if the iPhone is locked." = "Selecciona una o varias aplicaciones para dejar de recibir notificaciones en el Pebble cuando el iPhone esté bloqueado.";
+"Choose Applications" = "Seleccionar aplicación";
+"Enable Notifications From" = "Activar notificaciones";
+"If you turn on the switch, you will receive notifications from a specific app even if the iPhone is unlocked." = "Selecciona una o varias aplicaciones para recibir notificaciones en el Pebble cuando el iPhone esté desbloqueado.";
+"Please donate via paypal to" = "Haz donación vía Paypal a";
+"Developed by Joe Merlino, credits to Tyler Hoffman." = "Desarrollado por Joe Merlino, créditos a Tyler Hoffman. Traducido al español por @___naiki___";

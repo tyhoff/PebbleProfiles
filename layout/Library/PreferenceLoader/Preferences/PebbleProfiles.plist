@@ -6,7 +6,7 @@ entry = {
 		{
 			cell = PSGroupCell;
 			label = "Phone Unlocked Behavior";
-			footerText = "When the phone is unlocked, supress notifications from the Pebble.";
+			footerText = "When the phone is unlocked it suppresses notifications to Pebble.";
 		},
 		{
 			cell = PSSwitchCell;
@@ -18,15 +18,28 @@ entry = {
 		},
 		{
 			cell = PSGroupCell;
-			label = "Do not Disturb silencer";
-			footerText = "When the DnD and this switch are on, supress notifications from the Pebble.";
+			label = "iPhone Do not Disturb";
+			footerText = "When the iPhone DnD and this switch are on it suppresses notifications to Pebble.";
 		},
 		{
 			cell = PSSwitchCell;
 			label = "Enabled";
-			default = 1;
+			default = 0;
 			defaults = "com.tyhoff.pebbleprofiles";
 			key = dnd;
+			PostNotification = "com.tyhoff.pebbleprofiles.preferencechanged";
+		},
+		{
+			cell = PSGroupCell;
+			label = "Pebble Do not Disturb";
+			footerText = "It replicates the Pebble DnD feature with the addition of a flipswitch toggle. If enabled it suppresses ALL notifications to Pebble.";
+		},
+		{
+			cell = PSSwitchCell;
+			label = "Enabled";
+			default = 0;
+			defaults = "com.tyhoff.pebbleprofiles";
+			key = pebblednd;
 			PostNotification = "com.tyhoff.pebbleprofiles.preferencechanged";
 		},
 		{
@@ -97,7 +110,7 @@ entry = {
 		},
 		{
 			cell = PSGroupCell;
-			label = "Please donate via paypal to:";
+			label = "Please donate via paypal to";
 			footerText = "Developed by Joe Merlino, credits to Tyler Hoffman.";
 		},
 		{
