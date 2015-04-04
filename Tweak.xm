@@ -6,6 +6,7 @@ static BOOL isDeviceLocked;
 static BOOL enabled;
 static BOOL dnd;
 static BOOL DNDEnabled;
+static BOOL pebblednd;
 
 NSMutableArray *disabled_apps;
 NSMutableArray *enabled_apps;
@@ -29,7 +30,7 @@ static NSString *domainString = @"/var/mobile/Library/Preferences/com.tyhoff.peb
     NSString *app_id = [alert appIdentifier];
 
     // do not allow applications that are not "enabled" to push a message
-    if ([disabled_apps containsObject:app_id] || (dnd && DNDEnabled)) {
+    if (enabled && ([disabled_apps containsObject:app_id] || (dnd && DNDEnabled) || pebblednd)) {
         return;
     }
 
@@ -51,7 +52,7 @@ static NSString *domainString = @"/var/mobile/Library/Preferences/com.tyhoff.peb
     NSString *app_id = [alert appIdentifier];
 
     // do not allow applications that are not "enabled" to push a message
-    if ([disabled_apps containsObject:app_id] || (dnd && DNDEnabled)) {
+    if (enabled && ([disabled_apps containsObject:app_id] || (dnd && DNDEnabled) || pebblednd)) {
         return;
     }
 
@@ -104,7 +105,9 @@ static void LoadSettings()
     NSNumber *n = (NSNumber *)[[NSUserDefaults standardUserDefaults] objectForKey:@"enabled" inDomain:domainString];
     enabled = (n)? [n boolValue]:YES;
     NSNumber *n2 = (NSNumber *)[[NSUserDefaults standardUserDefaults] objectForKey:@"dnd" inDomain:domainString];
-    dnd = (n2)? [n2 boolValue]:YES;
+    dnd = (n2)? [n2 boolValue]:NO;
+    NSNumber *n3 = (NSNumber *)[[NSUserDefaults standardUserDefaults] objectForKey:@"pebblednd" inDomain:domainString];
+    pebblednd = (n3)? [n3 boolValue]:NO;
     if ([[FSSwitchPanel sharedPanel] stateForSwitchIdentifier:@"com.a3tweaks.switch.do-not-disturb"] == 0){
         DNDEnabled = NO;
     }
@@ -136,6 +139,7 @@ static void LoadSettings()
             [enabled_apps addObject:key];
         }
     }
+    NSLog(@"PEBBLEPROFILES status:%d dndsetting:%d pebblednd:%d",enabled,dnd,pebblednd);
     NSLog(@"Disabled Applications: %@", disabled_apps);
     NSLog(@"Enabled Applications: %@", enabled_apps);
 }
