@@ -1,0 +1,16 @@
+"UNLOCK" = "Phone Unlocked Behavior";
+"ENABLED" = "Enabled";
+"UNLOCK_FOOTER" = "When the phone is unlocked it suppresses notifications to Pebble.";
+"DND" = "iPhone Do not Disturb";
+"DND_FOOTER" = "When the iPhone DnD and this switch are on it suppresses notifications to Pebble.";
+"PEBBLEDND" = "Pebble Do not Disturb";
+"PEBBLEDND_FOOTER" = "It replicates the Pebble DnD feature with the addition of a flipswitch toggle. If enabled it suppresses ALL notifications to Pebble.";
+"DISABLEDAPPS" = "Disable Notifications From";
+"DISABLEDAPPS_FOOTER" = "If you turn on the switch, you won't receive notifications from a specific app even if the iPhone is locked.";
+"APPLICATIONS" = "Choose Applications";
+"ENABLEDAPPS" = "Enable Notifications From";
+"ENABLEDAPPS_FOOTER" = "If you turn on the switch, you will receive notifications from a specific app even if the iPhone is unlocked.";
+"DONATE" = "Please donate via paypal to";
+"DONATE_FOOTER" = "Developed by @joe_merlino, credits to Tyler Hoffman.";
+"System Applications" = "System Applications";
+"User Applications" = "User Applications";

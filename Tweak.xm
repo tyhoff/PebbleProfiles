@@ -30,7 +30,7 @@ static NSString *domainString = @"/var/mobile/Library/Preferences/com.tyhoff.peb
     NSString *app_id = [alert appIdentifier];
 
     // do not allow applications that are not "enabled" to push a message
-    if (enabled && ([disabled_apps containsObject:app_id] || (dnd && DNDEnabled) || pebblednd)) {
+    if ([disabled_apps containsObject:app_id] || (dnd && DNDEnabled) || pebblednd) {
         return;
     }
 
@@ -52,7 +52,7 @@ static NSString *domainString = @"/var/mobile/Library/Preferences/com.tyhoff.peb
     NSString *app_id = [alert appIdentifier];
 
     // do not allow applications that are not "enabled" to push a message
-    if (enabled && ([disabled_apps containsObject:app_id] || (dnd && DNDEnabled) || pebblednd)) {
+    if ([disabled_apps containsObject:app_id] || (dnd && DNDEnabled) || pebblednd) {
         return;
     }
 

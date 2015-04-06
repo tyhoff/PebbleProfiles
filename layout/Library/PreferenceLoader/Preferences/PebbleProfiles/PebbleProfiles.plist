@@ -1,16 +1,16 @@
 entry = {
 	cell = PSLinkCell;
-	icon = "/Library/PreferenceLoader/Preferences/PebbleProfiles.png";
+	icon = "/Library/PreferenceLoader/Preferences/PebbleProfiles/PebbleProfiles.png";
 	label = "Pebble Profiles";
 	items = (
 		{
 			cell = PSGroupCell;
-			label = "Phone Unlocked Behavior";
-			footerText = "When the phone is unlocked it suppresses notifications to Pebble.";
+			label = "UNLOCK";
+			footerText = "UNLOCK_FOOTER";
 		},
 		{
 			cell = PSSwitchCell;
-			label = "Enabled";
+			label = "ENABLED";
 			default = 1;
 			defaults = "com.tyhoff.pebbleprofiles";
 			key = enabled;
@@ -18,12 +18,12 @@ entry = {
 		},
 		{
 			cell = PSGroupCell;
-			label = "iPhone Do not Disturb";
-			footerText = "When the iPhone DnD and this switch are on it suppresses notifications to Pebble.";
+			label = "DND";
+			footerText = "DND_FOOTER";
 		},
 		{
 			cell = PSSwitchCell;
-			label = "Enabled";
+			label = "ENABLED";
 			default = 0;
 			defaults = "com.tyhoff.pebbleprofiles";
 			key = dnd;
@@ -31,12 +31,12 @@ entry = {
 		},
 		{
 			cell = PSGroupCell;
-			label = "Pebble Do not Disturb";
-			footerText = "It replicates the Pebble DnD feature with the addition of a flipswitch toggle. If enabled it suppresses ALL notifications to Pebble.";
+			label = "PEBBLEDND";
+			footerText = "PEBBLEDND_FOOTER";
 		},
 		{
 			cell = PSSwitchCell;
-			label = "Enabled";
+			label = "ENABLED";
 			default = 0;
 			defaults = "com.tyhoff.pebbleprofiles";
 			key = pebblednd;
@@ -44,19 +44,20 @@ entry = {
 		},
 		{
 			cell = PSGroupCell;
-			label = "Disable Notifications From";
-			footerText = "If you turn on the switch, you won't receive notifications from a specific app even if the iPhone is locked.";
+			label = "DISABLEDAPPS";
+			footerText = "DISABLEDAPPS_FOOTER";
 		},
 		{
 			bundle = AppList;
 			cell = PSLinkCell;
 			isController = 1;
-			label = "Choose Applications";
+			label = "APPLICATIONS";
 			ALSettingsPath = "/var/mobile/Library/Preferences/com.tyhoff.pebbleprofiles.applist.plist";
 			ALSettingsKeyPrefix = "";
 			ALChangeNotification = "com.tyhoff.pebbleprofiles.preferencechanged";
 			"ALSettingsDefaultValue" = 0;
 			ALAllowsSelection = 1;
+			ALLocalizationBundle = "/Library/PreferenceLoader/Preferences/PebbleProfiles";
 			ALSectionDescriptors = (
 				{
 				  title = "User Applications";
@@ -77,19 +78,20 @@ entry = {
 		},
 		{
 			cell = PSGroupCell;
-			label = "Enable Notifications From";
-			footerText = "If you turn on the switch, you will receive notifications from a specific app even if the iPhone is unlocked.";
+			label = "ENABLEDAPPS";
+			footerText = "ENABLEDAPPS_FOOTER";
 		},
 		{
 			bundle = AppList;
 			cell = PSLinkCell;
 			isController = 1;
-			label = "Choose Applications";
+			label = "APPLICATIONS";
 			ALSettingsPath = "/var/mobile/Library/Preferences/com.tyhoff.pebbleprofiles.applist2.plist";
 			ALSettingsKeyPrefix = "";
 			ALChangeNotification = "com.tyhoff.pebbleprofiles.preferencechanged";
 			"ALSettingsDefaultValue" = 0;
 			ALAllowsSelection = 1;
+			ALLocalizationBundle = "/Library/PreferenceLoader/Preferences/PebbleProfiles";
 			ALSectionDescriptors = (
 				{
 				  title = "User Applications";
@@ -110,8 +112,8 @@ entry = {
 		},
 		{
 			cell = PSGroupCell;
-			label = "Please donate via paypal to";
-			footerText = "Developed by Joe Merlino, credits to Tyler Hoffman.";
+			label = "DONATE";
+			footerText = "DONATE_FOOTER";
 		},
 		{
 			cell = PSTitleValueCell;
