@@ -1,0 +1,16 @@
+"UNLOCK" = "iPhone sbloccato";
+"ENABLED" = "Attivato";
+"UNLOCK_FOOTER" = "Quando il telefono è sbloccato disattiva le notifiche al Pebble.";
+"DND" = "Non disturbare - iPhone";
+"DND_FOOTER" = "Quando è attiva la modalità non disturbare disattiva le notifiche al Pebble anche quando il telefono è bloccato.";
+"PEBBLEDND" = "Non disturbare - Pebble";
+"PEBBLEDND_FOOTER" = "Replica la modalità non disturbare del Pebble con l'aggiunta di un toggle Flipswitch. Se abilitato, disattiva TUTTE le notifiche al Pebble.";
+"DISABLEDAPPS" = "Disabilita notifiche da";
+"DISABLEDAPPS_FOOTER" = "Non riceverai notifiche dalle applicazioni specificate anche se il telefono è bloccato.";
+"APPLICATIONS" = "Seleziona applicazioni";
+"ENABLEDAPPS" = "Abilita notifiche da";
+"ENABLEDAPPS_FOOTER" = "Riceverai notifiche dalle applicazioni specificate anche se il telefono è sbloccato.";
+"DONATE" = "fai una donazione via Paypal a";
+"DONATE_FOOTER" = "Sviluppato da @joe_merlino, crediti a Tyler Hoffman.";
+"System Applications" = "Applicazioni di sistema";
+"User Applications" = "Applicazioni utente";
