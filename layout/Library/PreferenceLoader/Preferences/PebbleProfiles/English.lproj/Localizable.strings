@@ -14,3 +14,5 @@
 "DONATE_FOOTER" = "Developed by @joe_merlino, credits to Tyler Hoffman.";
 "System Applications" = "System Applications";
 "User Applications" = "User Applications";
+"WHITELIST" = "Whitelist for enabled apps";
+"WHITELIST_FOOTER" = "Pushes notifications to Pebble for enabled apps even if Pebble DnD is on.";

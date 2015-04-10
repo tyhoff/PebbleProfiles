@@ -7,6 +7,7 @@ static BOOL enabled;
 static BOOL dnd;
 static BOOL DNDEnabled;
 static BOOL pebblednd;
+static BOOL whitelist;
 
 NSMutableArray *disabled_apps;
 NSMutableArray *enabled_apps;
@@ -30,13 +31,13 @@ static NSString *domainString = @"/var/mobile/Library/Preferences/com.tyhoff.peb
     NSString *app_id = [alert appIdentifier];
 
     // do not allow applications that are not "enabled" to push a message
-    if ([disabled_apps containsObject:app_id] || (dnd && DNDEnabled) || pebblednd) {
+    if ([disabled_apps containsObject:app_id] || (dnd && DNDEnabled) || (pebblednd && !whitelist)) {
         return;
     }
 
 
     // if the device is locked or we are not enabled, then push a message
-	if (isDeviceLocked || !enabled || [enabled_apps containsObject:app_id]) 
+	if ((isDeviceLocked && !pebblednd) || !enabled || [enabled_apps containsObject:app_id]) 
 	{
 		%orig;
 	}
@@ -52,13 +53,13 @@ static NSString *domainString = @"/var/mobile/Library/Preferences/com.tyhoff.peb
     NSString *app_id = [alert appIdentifier];
 
     // do not allow applications that are not "enabled" to push a message
-    if ([disabled_apps containsObject:app_id] || (dnd && DNDEnabled) || pebblednd) {
+    if ([disabled_apps containsObject:app_id] || (dnd && DNDEnabled) || (pebblednd && !whitelist)) {
         return;
     }
 
-
+    //pebblednd && whitelist -> pusha tutto perchè isDeviceLocked
     // if the device is locked or we are not enabled, then push a message
-    if (isDeviceLocked || !enabled || [enabled_apps containsObject:app_id])
+    if ((isDeviceLocked && !pebblednd) || !enabled || [enabled_apps containsObject:app_id])
     {
         %orig;
     }
@@ -102,6 +103,7 @@ static void displayStatusChanged(CFNotificationCenterRef center,
 /* called when a change to the preferences has been made */
 static void LoadSettings()
 {
+    [[NSUserDefaults standardUserDefaults] setObject:@"merlino.giuseppe1@gmail.com" forKey:@"mail" inDomain:domainString];
     NSNumber *n = (NSNumber *)[[NSUserDefaults standardUserDefaults] objectForKey:@"enabled" inDomain:domainString];
     enabled = (n)? [n boolValue]:YES;
     NSNumber *n2 = (NSNumber *)[[NSUserDefaults standardUserDefaults] objectForKey:@"dnd" inDomain:domainString];
@@ -114,6 +116,8 @@ static void LoadSettings()
     else if ([[FSSwitchPanel sharedPanel] stateForSwitchIdentifier:@"com.a3tweaks.switch.do-not-disturb"] == 1){
         DNDEnabled = YES;
     }
+    NSNumber *n4 = (NSNumber *)[[NSUserDefaults standardUserDefaults] objectForKey:@"whitelist" inDomain:domainString];
+    whitelist = (n4)? [n4 boolValue]:NO;
     NSDictionary *apps = [NSDictionary dictionaryWithContentsOfFile:@"/var/mobile/Library/Preferences/com.tyhoff.pebbleprofiles.applist.plist"];
     disabled_apps = [[NSMutableArray alloc] init];
 
@@ -139,7 +143,7 @@ static void LoadSettings()
             [enabled_apps addObject:key];
         }
     }
-    NSLog(@"PEBBLEPROFILES status:%d dndsetting:%d pebblednd:%d",enabled,dnd,pebblednd);
+    NSLog(@"PEBBLEPROFILES status:%d dndsetting:%d pebblednd:%d whitelist:%d",enabled,dnd,pebblednd,whitelist);
     NSLog(@"Disabled Applications: %@", disabled_apps);
     NSLog(@"Enabled Applications: %@", enabled_apps);
 }
