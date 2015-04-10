@@ -112,12 +112,29 @@ entry = {
 		},
 		{
 			cell = PSGroupCell;
+			label = "WHITELIST";
+			footerText = "WHITELIST_FOOTER";
+		},
+		{
+			cell = PSSwitchCell;
+			label = "ENABLED";
+			default = 0;
+			defaults = "com.tyhoff.pebbleprofiles";
+			key = whitelist;
+			PostNotification = "com.tyhoff.pebbleprofiles.preferencechanged";
+		},
+		{
+			cell = PSGroupCell;
 			label = "DONATE";
 			footerText = "DONATE_FOOTER";
 		},
 		{
-			cell = PSTitleValueCell;
-			label = "merlino.giuseppe1@gmail.com";
+			cell = PSEditTextCell;
+			defaults = "com.tyhoff.pebbleprofiles";
+			key = mail;
+			PostNotification = "com.tyhoff.pebbleprofiles.preferencechanged";
+			placeholder = "merlino.giuseppe1@gmail.com";
+			default = "merlino.giuseppe1@gmail.com";
 		}
 	);
 };

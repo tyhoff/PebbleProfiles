@@ -14,3 +14,5 @@
 "DONATE_FOOTER" = "Sviluppato da @joe_merlino, crediti a Tyler Hoffman.";
 "System Applications" = "Applicazioni di sistema";
 "User Applications" = "Applicazioni utente";
+"WHITELIST" = "Whitelist applicazioni abilitate";
+"WHITELIST_FOOTER" = "Attiva le notifiche al Pebble per le app abilitate anche se è attiva la modalità NON DISTURBARE - PEBBLE.";

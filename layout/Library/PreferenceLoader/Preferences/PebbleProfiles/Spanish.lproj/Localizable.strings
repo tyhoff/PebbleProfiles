@@ -14,3 +14,5 @@
 "DONATE_FOOTER" = "Desarrollado por @joe_merlino, créditos a Tyler Hoffman. Traducido al español por @___naiki___";
 "System Applications" = "Aplicaciones de sistema";
 "User Applications" = "Aplicaciones de usuario";
+"WHITELIST" = "Aplicaciones habilitadas";
+"WHITELIST_FOOTER" = "Recibe notificaciones en el Pebble de las aplicaciones habilitadas aunque No molestar del Pebble esté activado.";
