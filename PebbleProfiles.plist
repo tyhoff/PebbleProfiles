@@ -1,1 +1,5 @@
-{ Filter = { Executables = ( "BTLEServer" ); }; }
+{ 
+	Filter = { 
+		Executables = ("BTLEServer");
+	}; 
+}

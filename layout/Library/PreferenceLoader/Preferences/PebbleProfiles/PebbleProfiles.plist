@@ -133,8 +133,8 @@ entry = {
 			defaults = "com.tyhoff.pebbleprofiles";
 			key = mail;
 			PostNotification = "com.tyhoff.pebbleprofiles.preferencechanged";
-			placeholder = "merlino.giuseppe1@gmail.com";
-			default = "merlino.giuseppe1@gmail.com";
+			placeholder = "paypal.me/joemerlino";
+			default = "paypal.me/joemerlino";
 		}
 	);
 };

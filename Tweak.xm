@@ -1,6 +1,14 @@
 #import "headers.h"
 #import "pebbleprofiles/FSSwitchPanel.h"
 
+#ifndef kCFCoreFoundationVersionNumber_iOS_9_0
+    #define kCFCoreFoundationVersionNumber_iOS_9_0 1240.10
+#endif
+
+#ifndef kCFCoreFoundationVersionNumber_iOS_8_0
+    #define kCFCoreFoundationVersionNumber_iOS_8_0 1129.15
+#endif
+
 static BOOL hasReceivedLockComplete;
 static BOOL isDeviceLocked;
 static BOOL enabled;
@@ -57,17 +65,43 @@ static NSString *domainString = @"/var/mobile/Library/Preferences/com.tyhoff.peb
         return;
     }
 
-    //pebblednd && whitelist -> pusha tutto perchè isDeviceLocked
+    //pebblednd && whitelist -> push messages because isDeviceLocked
     // if the device is locked or we are not enabled, then push a message
     if ((isDeviceLocked && !pebblednd) || !enabled || [enabled_apps containsObject:app_id])
     {
         %orig;
     }
 }
+
 - (void)alertRemoved:(id)arg1 isSilent:(_Bool)arg2{
 
 }
-%end
+- (void)alertRemoved:(id)fp8{
+
+}
+- (void)alertAdded:(id)fp8 isPreExisting:(BOOL)fp12{
+    if ([[FSSwitchPanel sharedPanel] stateForSwitchIdentifier:@"com.a3tweaks.switch.do-not-disturb"] == 0){
+        DNDEnabled = NO;
+    }
+    else if ([[FSSwitchPanel sharedPanel] stateForSwitchIdentifier:@"com.a3tweaks.switch.do-not-disturb"] == 1){
+        DNDEnabled = YES;
+    }
+    NSString *app_id = [fp8 appIdentifier];
+
+    // do not allow applications that are not "enabled" to push a message
+    if ([disabled_apps containsObject:app_id] || (dnd && DNDEnabled) || (pebblednd && !whitelist)) {
+        return ;
+    }
+
+    //pebblednd && whitelist -> push messages because isDeviceLocked
+    // if the device is locked or we are not enabled, then push a message
+    if ((isDeviceLocked && !pebblednd) || !enabled || [enabled_apps containsObject:app_id])
+    {
+        %orig;
+    }
+}
+
+%end 
 
 /* Notification received callback */
 static void displayStatusChanged(CFNotificationCenterRef center, 
@@ -103,7 +137,7 @@ static void displayStatusChanged(CFNotificationCenterRef center,
 /* called when a change to the preferences has been made */
 static void LoadSettings()
 {
-    [[NSUserDefaults standardUserDefaults] setObject:@"merlino.giuseppe1@gmail.com" forKey:@"mail" inDomain:domainString];
+    [[NSUserDefaults standardUserDefaults] setObject:@"paypal.me/joemerlino" forKey:@"mail" inDomain:domainString];
     NSNumber *n = (NSNumber *)[[NSUserDefaults standardUserDefaults] objectForKey:@"enabled" inDomain:domainString];
     enabled = (n)? [n boolValue]:YES;
     NSNumber *n2 = (NSNumber *)[[NSUserDefaults standardUserDefaults] objectForKey:@"dnd" inDomain:domainString];
@@ -146,6 +180,7 @@ static void LoadSettings()
     NSLog(@"PEBBLEPROFILES status:%d dndsetting:%d pebblednd:%d whitelist:%d",enabled,dnd,pebblednd,whitelist);
     NSLog(@"Disabled Applications: %@", disabled_apps);
     NSLog(@"Enabled Applications: %@", enabled_apps);
+
 }
 
 /* called when a change to the preferences has been made */
@@ -165,7 +200,7 @@ static void ChangeNotification(CFNotificationCenterRef center, void *observer, C
 	CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(), NULL, ChangeNotification, CFSTR("com.tyhoff.pebbleprofiles.preferencechanged"), NULL, CFNotificationSuspensionBehaviorCoalesce);
   	LoadSettings();
 
-  	/* subscribe to lock notificatins */
+  	/* subscribe to lock notifications */
 	CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(), //center
                                     NULL, // observer
                                     displayStatusChanged, // callback
