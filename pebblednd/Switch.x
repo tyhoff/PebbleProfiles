@@ -1,15 +1,13 @@
 #import "FSSwitchDataSource.h"
 #import "FSSwitchPanel.h"
-#include <CoreFoundation/CFNotificationCenter.h>
-#import <notify.h>
-
-static NSString *domainString = @"/var/mobile/Library/Preferences/com.tyhoff.pebbleprofiles.plist";
-static NSString * const kSwitchKey = @"pebblednd";
 
 @interface NSUserDefaults (UFS_Category)
 - (id)objectForKey:(NSString *)key inDomain:(NSString *)domain;
 - (void)setObject:(id)value forKey:(NSString *)key inDomain:(NSString *)domain;
 @end
+
+static NSString *nsDomainString = @"com.tyhoff.pebbleprofiles";
+static NSString *nsNotificationString = @"com.pebbleprofiles.preferencechanged";
 
 @interface pebbledndSwitch : NSObject <FSSwitchDataSource>
 @end
@@ -22,7 +20,7 @@ static NSString * const kSwitchKey = @"pebblednd";
 
 - (FSSwitchState)stateForSwitchIdentifier:(NSString *)switchIdentifier
 {
-	NSNumber *n = (NSNumber *)[[NSUserDefaults standardUserDefaults] objectForKey:kSwitchKey inDomain:domainString];
+	NSNumber *n = (NSNumber *)[[NSUserDefaults standardUserDefaults] objectForKey:@"pebblednd" inDomain:nsDomainString];
 	BOOL enabled = (n) ? [n boolValue]:YES;
 	return (enabled) ? FSSwitchStateOn : FSSwitchStateOff;
 }
@@ -33,15 +31,15 @@ static NSString * const kSwitchKey = @"pebblednd";
 	case FSSwitchStateIndeterminate:
 		break;
 	case FSSwitchStateOn:
-		[[NSUserDefaults standardUserDefaults] setObject:@YES forKey:kSwitchKey inDomain:domainString];
-		[[NSUserDefaults standardUserDefaults] synchronize];
+		[[NSUserDefaults standardUserDefaults] setObject:@YES forKey:@"pebblednd" inDomain:nsDomainString];
+		CFNotificationCenterPostNotification(CFNotificationCenterGetDarwinNotifyCenter(), (CFStringRef)nsNotificationString, NULL, NULL, YES);
 		break;
 	case FSSwitchStateOff:
-		[[NSUserDefaults standardUserDefaults] setObject:@NO forKey:kSwitchKey inDomain:domainString];
-		[[NSUserDefaults standardUserDefaults] synchronize];
+		[[NSUserDefaults standardUserDefaults] setObject:@NO forKey:@"pebblednd" inDomain:nsDomainString];
+		CFNotificationCenterPostNotification(CFNotificationCenterGetDarwinNotifyCenter(), (CFStringRef)nsNotificationString, NULL, NULL, YES);
 		break;
 	}
-	notify_post("com.tyhoff.pebbleprofiles.preferencechanged");
+	return;
 }
 
 @end

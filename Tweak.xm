@@ -1,14 +1,6 @@
 #import "headers.h"
 #import "pebbleprofiles/FSSwitchPanel.h"
 
-#ifndef kCFCoreFoundationVersionNumber_iOS_9_0
-    #define kCFCoreFoundationVersionNumber_iOS_9_0 1240.10
-#endif
-
-#ifndef kCFCoreFoundationVersionNumber_iOS_8_0
-    #define kCFCoreFoundationVersionNumber_iOS_8_0 1129.15
-#endif
-
 static BOOL hasReceivedLockComplete;
 static BOOL isDeviceLocked;
 static BOOL enabled;
@@ -19,13 +11,6 @@ static BOOL whitelist;
 
 NSMutableArray *disabled_apps;
 NSMutableArray *enabled_apps;
-
-static NSString *domainString = @"/var/mobile/Library/Preferences/com.tyhoff.pebbleprofiles.plist";
-
-@interface NSUserDefaults (Tweak_Category)
-- (id)objectForKey:(NSString *)key inDomain:(NSString *)domain;
-- (void)setObject:(id)value forKey:(NSString *)key inDomain:(NSString *)domain;
-@end
 
 %hook ANCService
 - (void)alertAdded:(ANCAlert *)alert isSilent:(_Bool)isSilent
@@ -137,21 +122,17 @@ static void displayStatusChanged(CFNotificationCenterRef center,
 /* called when a change to the preferences has been made */
 static void LoadSettings()
 {
-    [[NSUserDefaults standardUserDefaults] setObject:@"paypal.me/joemerlino" forKey:@"mail" inDomain:domainString];
-    NSNumber *n = (NSNumber *)[[NSUserDefaults standardUserDefaults] objectForKey:@"enabled" inDomain:domainString];
-    enabled = (n)? [n boolValue]:YES;
-    NSNumber *n2 = (NSNumber *)[[NSUserDefaults standardUserDefaults] objectForKey:@"dnd" inDomain:domainString];
-    dnd = (n2)? [n2 boolValue]:NO;
-    NSNumber *n3 = (NSNumber *)[[NSUserDefaults standardUserDefaults] objectForKey:@"pebblednd" inDomain:domainString];
-    pebblednd = (n3)? [n3 boolValue]:NO;
+    NSMutableDictionary *prefs = [[NSMutableDictionary alloc] initWithContentsOfFile:@"/private/var/mobile/Library/Preferences/com.tyhoff.pebbleprofiles.plist"];
+    enabled = ([prefs objectForKey:@"enabled"] ? [[prefs objectForKey:@"enabled"] boolValue] : YES);
+    dnd = ([prefs objectForKey:@"dnd"] ? [[prefs objectForKey:@"dnd"] boolValue] : NO);
+    pebblednd = ([prefs objectForKey:@"pebblednd"] ? [[prefs objectForKey:@"pebblednd"] boolValue] : NO);
     if ([[FSSwitchPanel sharedPanel] stateForSwitchIdentifier:@"com.a3tweaks.switch.do-not-disturb"] == 0){
         DNDEnabled = NO;
     }
     else if ([[FSSwitchPanel sharedPanel] stateForSwitchIdentifier:@"com.a3tweaks.switch.do-not-disturb"] == 1){
         DNDEnabled = YES;
     }
-    NSNumber *n4 = (NSNumber *)[[NSUserDefaults standardUserDefaults] objectForKey:@"whitelist" inDomain:domainString];
-    whitelist = (n4)? [n4 boolValue]:NO;
+    whitelist = ([prefs objectForKey:@"whitelist"] ? [[prefs objectForKey:@"whitelist"] boolValue] : NO);
     NSDictionary *apps = [NSDictionary dictionaryWithContentsOfFile:@"/var/mobile/Library/Preferences/com.tyhoff.pebbleprofiles.applist.plist"];
     disabled_apps = [[NSMutableArray alloc] init];
 
@@ -214,4 +195,5 @@ static void ChangeNotification(CFNotificationCenterRef center, void *observer, C
                                     CFSTR("com.apple.springboard.lockstate"), // event name
                                     NULL, // object
                                     CFNotificationSuspensionBehaviorDeliverImmediately);
+
 }
