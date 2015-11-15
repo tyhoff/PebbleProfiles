@@ -158,9 +158,9 @@ static void LoadSettings()
             [enabled_apps addObject:key];
         }
     }
-    NSLog(@"PEBBLEPROFILES status:%d dndsetting:%d pebblednd:%d whitelist:%d",enabled,dnd,pebblednd,whitelist);
-    NSLog(@"Disabled Applications: %@", disabled_apps);
-    NSLog(@"Enabled Applications: %@", enabled_apps);
+    NSLog(@"[PEBBLEPROFILES] status:%d dndsetting:%d pebblednd:%d whitelist:%d",enabled,dnd,pebblednd,whitelist);
+    NSLog(@"[PEBBLEPROFILES] Disabled Applications: %@", disabled_apps);
+    NSLog(@"[PEBBLEPROFILES] Enabled Applications: %@", enabled_apps);
 
 }
 

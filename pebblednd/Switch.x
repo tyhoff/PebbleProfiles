@@ -7,7 +7,7 @@
 @end
 
 static NSString *nsDomainString = @"com.tyhoff.pebbleprofiles";
-static NSString *nsNotificationString = @"com.pebbleprofiles.preferencechanged";
+static NSString *nsNotificationString = @"com.tyhoff.pebbleprofiles.preferencechanged";
 
 @interface pebbledndSwitch : NSObject <FSSwitchDataSource>
 @end
