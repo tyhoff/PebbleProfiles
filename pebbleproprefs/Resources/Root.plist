@@ -62,7 +62,6 @@ items = (
 			  "cell-class-name" = "ALSwitchCell";
 			  "icon-size" = 29;
 			  "suppress-hidden-apps" = 1;
-			  "footer-title" = "© 2010-2012 Ryan Petrich";
 			},
 			{
 			  title = "System Applications";
@@ -96,7 +95,6 @@ items = (
 			  "cell-class-name" = "ALSwitchCell";
 			  "icon-size" = 29;
 			  "suppress-hidden-apps" = 1;
-			  "footer-title" = "© 2010-2012 Ryan Petrich";
 			},
 			{
 			  title = "System Applications";
@@ -119,6 +117,79 @@ items = (
 		defaults = "com.tyhoff.pebbleprofiles";
 		key = whitelist;
 		PostNotification = "com.tyhoff.pebbleprofiles.preferencechanged";
+	},
+	{
+		cell = PSGroupCell;
+		label = "WORDFILTER";
+		footerText = "WORDFILTER_FOOTER";
+	},
+	{
+		bundle = AppList;
+		cell = PSLinkCell;
+		isController = 1;
+		label = "APPLICATIONS";
+		ALSettingsPath = "/var/mobile/Library/Preferences/com.tyhoff.pebbleprofiles.applist3.plist";
+		ALSettingsKeyPrefix = "";
+		ALChangeNotification = "com.tyhoff.pebbleprofiles.preferencechanged";
+		"ALSettingsDefaultValue" = 0;
+		ALAllowsSelection = 1;
+		ALLocalizationBundle = "/Library/PreferenceBundles/PebbleProPrefs.bundle";
+		ALSectionDescriptors = (
+		{
+			title = "User Applications";
+			predicate = "isSystemApplication = FALSE";
+			"cell-class-name" = "ALDisclosureIndicatedCell";
+			validTitles = ("");
+			validValues = (0);
+			"icon-size" = 29;
+			action = "showPreferences";
+			"display-identifier-macro" = "@@DISPLAYIDENTIFIER@@";
+			"suppress-hidden-apps" = 1;
+			entry = {
+				items = (
+				{
+					cell = PSGroupCell;
+					label = "";
+					footerText = "Notifications with this text in them will always get blocked.";
+				},
+				{
+					cell = PSEditTextCell;
+					placeholder = "Blocked text";
+					key = "@@DISPLAYIDENTIFIER@@";
+					defaults = "com.tyhoff.pebbleprofiles.applist3";
+					PostNotification = "com.tyhoff.pebbleprofiles.preferencechanged";
+				}
+				);
+			};
+		},
+		{
+			title = "System Applications";
+			predicate = "isSystemApplication = TRUE";
+			"cell-class-name" = "ALDisclosureIndicatedCell";
+			validTitles = ("");
+			validValues = (0);
+			"icon-size" = 29;
+			action = "showPreferences";
+			"display-identifier-macro" = "@@DISPLAYIDENTIFIER@@";
+			"suppress-hidden-apps" = 1;
+			entry = {
+				items = (
+				{
+					cell = PSGroupCell;
+					label = "";
+					footerText = "Notifications with this text in them will always get blocked.";
+				},
+				{
+					cell = PSEditTextCell;
+					placeholder = "Blocked text";
+					key = "@@DISPLAYIDENTIFIER@@";
+					defaults = "com.tyhoff.pebbleprofiles.applist3";
+					PostNotification = "com.tyhoff.pebbleprofiles.preferencechanged";
+				}
+				);
+			};
+		}
+		);
 	},
 	{
 		cell = PSGroupCell;

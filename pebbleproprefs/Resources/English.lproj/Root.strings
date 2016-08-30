@@ -16,3 +16,5 @@
 "User Applications" = "User Applications";
 "WHITELIST" = "Whitelist for enabled apps";
 "WHITELIST_FOOTER" = "Pushes notifications to Pebble for enabled apps even if Pebble DnD is on.";
+"WORDFILTER" = "Filter notifications content";
+"WORDFILTER_FOOTER" = "There you can set content-based notification filters.";

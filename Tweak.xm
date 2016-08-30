@@ -11,6 +11,7 @@ static BOOL whitelist;
 
 NSMutableArray *disabled_apps;
 NSMutableArray *enabled_apps;
+NSMutableDictionary *blacklisted_words;
 
 %hook ANCService
 - (void)alertAdded:(ANCAlert *)alert isSilent:(_Bool)isSilent
@@ -28,11 +29,13 @@ NSMutableArray *enabled_apps;
         return;
     }
 
-
     // if the device is locked or we are not enabled, then push a message
 	if ((isDeviceLocked && !pebblednd) || !enabled || [enabled_apps containsObject:app_id]) 
 	{
-		%orig;
+        NSString *black_word = [blacklisted_words objectForKey:app_id];
+        if(black_word == nil || ([[alert title] rangeOfString:black_word].location == NSNotFound && [[alert message] rangeOfString:black_word].location == NSNotFound)) {
+            %orig;
+        }
 	}
 }
 
@@ -54,7 +57,10 @@ NSMutableArray *enabled_apps;
     // if the device is locked or we are not enabled, then push a message
     if ((isDeviceLocked && !pebblednd) || !enabled || [enabled_apps containsObject:app_id])
     {
-        %orig;
+        NSString *black_word = [blacklisted_words objectForKey:app_id];
+        if(black_word == nil || ([[alert title] rangeOfString:black_word].location == NSNotFound && [[alert message] rangeOfString:black_word].location == NSNotFound)) {
+            %orig;
+        }
     }
 }
 
@@ -64,25 +70,28 @@ NSMutableArray *enabled_apps;
 - (void)alertRemoved:(id)fp8{
 
 }
-- (void)alertAdded:(id)fp8 isPreExisting:(BOOL)fp12{
+- (void)alertAdded:(id)alert isPreExisting:(_Bool)arg2{
     if ([[FSSwitchPanel sharedPanel] stateForSwitchIdentifier:@"com.a3tweaks.switch.do-not-disturb"] == 0){
         DNDEnabled = NO;
     }
     else if ([[FSSwitchPanel sharedPanel] stateForSwitchIdentifier:@"com.a3tweaks.switch.do-not-disturb"] == 1){
         DNDEnabled = YES;
     }
-    NSString *app_id = [fp8 appIdentifier];
-
+    NSString *app_id = [alert appIdentifier];
+    
     // do not allow applications that are not "enabled" to push a message
     if ([disabled_apps containsObject:app_id] || (dnd && DNDEnabled) || (pebblednd && !whitelist)) {
-        return ;
+        return;
     }
-
+    
     //pebblednd && whitelist -> push messages because isDeviceLocked
     // if the device is locked or we are not enabled, then push a message
     if ((isDeviceLocked && !pebblednd) || !enabled || [enabled_apps containsObject:app_id])
     {
-        %orig;
+        NSString *black_word = [blacklisted_words objectForKey:app_id];
+        if(black_word == nil || ([[alert title] rangeOfString:black_word].location == NSNotFound && [[alert message] rangeOfString:black_word].location == NSNotFound)) {
+            %orig;
+        }
     }
 }
 
@@ -158,9 +167,21 @@ static void LoadSettings()
             [enabled_apps addObject:key];
         }
     }
+    
+    NSDictionary *apps3 = [NSDictionary dictionaryWithContentsOfFile:@"/var/mobile/Library/Preferences/com.tyhoff.pebbleprofiles.applist3.plist"];
+    blacklisted_words = [[NSMutableDictionary alloc] init];
+    
+    for (NSString *key in apps3) {
+        NSString *value = [apps3 objectForKey:key];
+        if([value length] > 0) {
+            [blacklisted_words setObject:value forKey:key];
+        }
+    }
+    
     NSLog(@"[PEBBLEPROFILES] status:%d dndsetting:%d pebblednd:%d whitelist:%d",enabled,dnd,pebblednd,whitelist);
     NSLog(@"[PEBBLEPROFILES] Disabled Applications: %@", disabled_apps);
     NSLog(@"[PEBBLEPROFILES] Enabled Applications: %@", enabled_apps);
+    NSLog(@"[PEBBLEPROFILES] Blacklisted words: %@", blacklisted_words);
 
 }
 
