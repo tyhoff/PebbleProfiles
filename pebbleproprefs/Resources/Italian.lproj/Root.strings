@@ -16,3 +16,5 @@
 "User Applications" = "Applicazioni utente";
 "WHITELIST" = "Whitelist applicazioni abilitate";
 "WHITELIST_FOOTER" = "Attiva le notifiche al Pebble per le app abilitate anche se è attiva la modalità NON DISTURBARE - PEBBLE.";
+"WORDFILTER" = "Blocca notifiche per contenuto";
+"WORDFILTER_FOOTER" = "Qui puoi bloccare le notifiche in base al loro contenuto.";

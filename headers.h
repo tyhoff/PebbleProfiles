@@ -20,4 +20,5 @@
 - (void)updateDataSource:(ANCAlert *)alert central:(id)arg2;
 - (void)alertAdded:(id)arg1 isSilent:(_Bool)arg2;
 - (void)alertAdded:(id)arg1 isSilent:(_Bool)arg2 isPreExisting:(_Bool)arg3;
+- (void)alertAdded:(id)arg1 isPreExisting:(_Bool)arg2;
 @end
