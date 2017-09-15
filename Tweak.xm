@@ -33,7 +33,7 @@ NSMutableDictionary *blacklisted_words;
 	if ((isDeviceLocked && !pebblednd) || !enabled || [enabled_apps containsObject:app_id]) 
 	{
         NSString *black_word = [blacklisted_words objectForKey:app_id];
-        if(black_word == nil || ([[alert title] rangeOfString:black_word].location == NSNotFound && [[alert message] rangeOfString:black_word].location == NSNotFound)) {
+        if(black_word == nil || ([[alert title] rangeOfString:black_word options:NSCaseInsensitiveSearch].location == NSNotFound && [[alert message] rangeOfString:black_word options:NSCaseInsensitiveSearch].location == NSNotFound)) {
             %orig;
         }
 	}
@@ -58,17 +58,17 @@ NSMutableDictionary *blacklisted_words;
     if ((isDeviceLocked && !pebblednd) || !enabled || [enabled_apps containsObject:app_id])
     {
         NSString *black_word = [blacklisted_words objectForKey:app_id];
-        if(black_word == nil || ([[alert title] rangeOfString:black_word].location == NSNotFound && [[alert message] rangeOfString:black_word].location == NSNotFound)) {
+        if(black_word == nil || ([[alert title] rangeOfString:black_word options:NSCaseInsensitiveSearch].location == NSNotFound && [[alert message] rangeOfString:black_word options:NSCaseInsensitiveSearch].location == NSNotFound)) {
             %orig;
         }
     }
 }
 
 - (void)alertRemoved:(id)arg1 isSilent:(_Bool)arg2{
-
+    %orig;
 }
 - (void)alertRemoved:(id)fp8{
-
+    %orig;
 }
 - (void)alertAdded:(id)alert isPreExisting:(_Bool)arg2{
     if ([[FSSwitchPanel sharedPanel] stateForSwitchIdentifier:@"com.a3tweaks.switch.do-not-disturb"] == 0){
@@ -89,7 +89,7 @@ NSMutableDictionary *blacklisted_words;
     if ((isDeviceLocked && !pebblednd) || !enabled || [enabled_apps containsObject:app_id])
     {
         NSString *black_word = [blacklisted_words objectForKey:app_id];
-        if(black_word == nil || ([[alert title] rangeOfString:black_word].location == NSNotFound && [[alert message] rangeOfString:black_word].location == NSNotFound)) {
+        if(black_word == nil || ([[alert title] rangeOfString:black_word options:NSCaseInsensitiveSearch].location == NSNotFound && [[alert message] rangeOfString:black_word options:NSCaseInsensitiveSearch].location == NSNotFound)) {
             %orig;
         }
     }

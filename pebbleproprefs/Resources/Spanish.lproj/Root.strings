@@ -16,3 +16,7 @@
 "User Applications" = "Aplicaciones de usuario";
 "WHITELIST" = "Aplicaciones habilitadas";
 "WHITELIST_FOOTER" = "Recibe notificaciones en el Pebble de las aplicaciones habilitadas aunque No molestar del Pebble esté activado.";
+"WORDFILTER" = "Bloquear notificaciones por contenido";
+"WORDFILTER_FOOTER" = "Aquí puedes bloquear notificaciones por el contenido.";
+"PLACEHOLDER" = "texto para bloquear";
+"PLACEHOLDER_FOOTER" = "Las notificaciones que tienen este texto en su interior siempre serán bloqueadas.";

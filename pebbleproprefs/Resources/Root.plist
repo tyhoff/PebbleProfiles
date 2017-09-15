@@ -150,11 +150,11 @@ items = (
 				{
 					cell = PSGroupCell;
 					label = "";
-					footerText = "Notifications with this text in them will always get blocked.";
+					footerText = "PLACEHOLDER_FOOTER";
 				},
 				{
 					cell = PSEditTextCell;
-					placeholder = "Blocked text";
+					placeholder = "PLACEHOLDER";
 					key = "@@DISPLAYIDENTIFIER@@";
 					defaults = "com.tyhoff.pebbleprofiles.applist3";
 					PostNotification = "com.tyhoff.pebbleprofiles.preferencechanged";
